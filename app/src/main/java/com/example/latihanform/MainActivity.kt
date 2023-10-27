@@ -69,7 +69,7 @@ fun TampilanLayout(
     ) {
         Column (
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier.padding(20.dp)
         ){
             TampilanForm()
@@ -83,6 +83,7 @@ fun TampilanLayout(
 fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
     var textNama by remember{ mutableStateOf("") }
     var textTlp by remember{ mutableStateOf("") }
+    var textEmail by remember{ mutableStateOf("") }
 
     val context = LocalContext.current
     val dataclass : DataForm
@@ -94,7 +95,7 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth(),
-        label = { Text(text = "Nama Lengkap")},
+        label = { Text(text = "Username")},
         onValueChange ={
             textNama = it
         }
@@ -109,6 +110,18 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
             textTlp = it
         }
     )
+    OutlinedTextField(
+        value = textEmail,
+        singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Email")},
+        onValueChange ={
+            textEmail = it
+        }
+    )
+
+    Text(text = "Jenis Kelamin :")
 
 
     SelectJK(options = jenis.map { id -> context.resources.getString(id) },
@@ -119,7 +132,9 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
         onClick = {
             cobaViewModel.insertData(textNama,textTlp,dataclass.sex)
         }
-    ) {
+    )
+
+    {
         Text(
             text =stringResource(R.string.submit),
             fontSize = 16.sp
@@ -143,7 +158,7 @@ fun SelectJK(
 ){
     var selectedValue by rememberSaveable{ mutableStateOf("") }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Row(modifier = Modifier.padding(16.dp)) {
         options.forEach { item ->
             Row (
                 modifier = Modifier.selectable(
@@ -166,7 +181,9 @@ fun SelectJK(
             }
         }
     }
+    Text(text = "Status :")
 }
+
 
 @Composable
 fun Texthasil(namanya:String,telponnya:String,jenisnya:String){
