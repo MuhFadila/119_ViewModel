@@ -40,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.latihanform.Data.CobaViewModel
 import com.example.latihanform.Data.DataForm
 import com.example.latihanform.Data.DataSource.jenis
+import com.example.latihanform.Data.DataSource.status
 import com.example.latihanform.ui.theme.LatihanFormTheme
 
 class MainActivity : ComponentActivity() {
@@ -128,7 +129,7 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
         onSelectionChanged = {
             cobaViewModel.setJenisK(it)
         })
-    SelectStatus(options = jenis.map { id -> context.resources.getString(id) },
+    SelectStatus(options = status.map { id -> context.resources.getString(id) },
         onSelectionChanged = {
             cobaViewModel.setStatus(it)
         })
