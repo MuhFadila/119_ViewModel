@@ -6,10 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
@@ -54,6 +52,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     TampilanLayout()
+
                 }
             }
         }
@@ -74,6 +73,7 @@ fun TampilanLayout(
             modifier = Modifier.padding(20.dp)
         ){
             TampilanForm()
+
         }
     }
 }
@@ -85,11 +85,21 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
     var textNama by remember{ mutableStateOf("") }
     var textTlp by remember{ mutableStateOf("") }
     var textEmail by remember{ mutableStateOf("") }
+    var textAlamat by remember{ mutableStateOf("") }
 
     val context = LocalContext.current
     val dataclass : DataForm
     val uiState by cobaViewModel.uiState.collectAsState()
     dataclass = uiState;
+
+    Row {
+
+        Text(text = "Register")
+    }
+    Text(modifier = Modifier.padding(start = 60.dp),
+        fontSize = 20.sp,
+        text = "Create Your Account")
+
 
     OutlinedTextField(
         value = textNama,
@@ -145,7 +155,7 @@ fun TampilanForm(cobaViewModel: CobaViewModel = viewModel()){
             fontSize = 16.sp
         )
     }
-    Spacer(modifier = Modifier.height(100.dp))
+
     Texthasil(
         jenisnya = cobaViewModel.jenisKL,
         statusnya = cobaViewModel.jenisStatus,
@@ -165,6 +175,8 @@ fun SelectJK(
 ){
     var selectedValue by rememberSaveable{ mutableStateOf("") }
 
+
+
     Row(modifier = Modifier.padding(16.dp)) {
         options.forEach { item ->
             Row (
@@ -188,7 +200,7 @@ fun SelectJK(
             }
         }
     }
-    Text(text = "Status :")
+
 
 }
 
@@ -199,6 +211,8 @@ fun SelectStatus(
 ){
     var selectedValue by rememberSaveable{ mutableStateOf("") }
 
+    Text(text = "Status :")
+
     Row(modifier = Modifier.padding(16.dp)) {
         options.forEach { item ->
             Row (
@@ -222,6 +236,7 @@ fun SelectStatus(
             }
         }
     }
+
 }
 
 
